@@ -60,11 +60,9 @@ import java.util.HashSet;
 import mqq.app.AppRuntime;
 import nil.nadph.qnotified.ExfriendManager;
 import nil.nadph.qnotified.activity.TroopSelectActivity;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.FaceImpl;
 import nil.nadph.qnotified.util.LicenseStatus;
 import nil.nadph.qnotified.util.Toasts;
-import nil.nadph.qnotified.util.Utils;
 
 public class SendBatchMsg {
 
@@ -188,7 +186,6 @@ public class SendBatchMsg {
                         }
                         boolean isSuccess = ntSendBatchMessages(getQQAppInterface(), context, msg,
                             type, uins);
-                        CliOper.batchSendMsg(Utils.getLongAccountUin(), msg, arrayList.size());
                         try {
                             Toasts.showToast(context, TOAST_TYPE_INFO,
                                 "发送" + (isSuccess ? "成功" : "失败"), Toast.LENGTH_SHORT);

@@ -34,7 +34,6 @@ import mqq.app.AppRuntime;
 import nil.nadph.qnotified.base.annotation.FunctionEntry;
 import nil.nadph.qnotified.step.DexDeobfStep;
 import nil.nadph.qnotified.step.Step;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.DexKit;
 import nil.nadph.qnotified.util.Toasts;
 import nil.nadph.qnotified.util.Utils;
@@ -68,9 +67,6 @@ public class CardMsgHook extends BaseInputButtonDecorator {
                                 .ntSendCardMsg(qqApp, session, text)) {
                                 Utils
                                     .runOnUiThread(() -> input.setText(""));
-                                CliOper
-                                    .sendCardMsg(Utils.getLongAccountUin(),
-                                        text);
                             } else {
                                 Toasts.error(ctx1, "XML语法错误(代码有误)");
                             }
@@ -89,9 +85,6 @@ public class CardMsgHook extends BaseInputButtonDecorator {
                                 .ntSendCardMsg(qqApp, session, text)) {
                                 Utils
                                     .runOnUiThread(() -> input.setText(""));
-                                CliOper
-                                    .sendCardMsg(Utils.getLongAccountUin(),
-                                        text);
                             } else {
                                 Toasts.error(ctx1, "JSON语法错误(代码有误)");
                             }

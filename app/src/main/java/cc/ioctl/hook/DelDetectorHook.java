@@ -56,7 +56,6 @@ import nil.nadph.qnotified.bridge.FriendChunk;
 import nil.nadph.qnotified.config.ConfigManager;
 import nil.nadph.qnotified.hook.CommonDelayableHook;
 import nil.nadph.qnotified.ui.ResUtils;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.LicenseStatus;
 import nil.nadph.qnotified.util.Utils;
 
@@ -201,7 +200,6 @@ public class DelDetectorHook extends CommonDelayableHook {
                             if (z) {
                                 return;
                             }
-                            CliOper.onLoad();
                             z = true;
                         }
                     }

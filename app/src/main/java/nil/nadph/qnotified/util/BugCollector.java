@@ -34,7 +34,6 @@ public class BugCollector {
             }
             Application ctx = HostInfo.getHostInfo().getApplication();
             if (ctx != null) {
-                CliOper.__init__(ctx);
                 Crashes.trackError(th);
             }
         } catch (Throwable ignored) {

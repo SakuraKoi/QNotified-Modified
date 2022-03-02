@@ -454,7 +454,6 @@ public class TroubleshootActivity extends IphoneTitleBarActivityCompat {
                         String msg;
                         Throwable t = null;
                         try {
-                            LicenseStatus.setUserCurrentStatus();
                             sb = new StringBuilder();
                             sb.append(uin).append(": ");
                             if (LicenseStatus.isWhitelisted()) {
