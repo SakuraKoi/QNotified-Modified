@@ -52,14 +52,7 @@ object Common {
 
     @JvmStatic
     fun getBuildIdSuffix(): String {
-        return try {
-            val ciBuildId = System.getenv()["APPCENTER_BUILD_ID"]
-            if (ciBuildId != null) ".$ciBuildId"
-            else ""
-        } catch (e: Exception) {
-            e.printStackTrace()
-            ""
-        }
+        return ".modified";
     }
 
     @JvmStatic

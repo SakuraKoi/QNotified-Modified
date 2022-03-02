@@ -4,7 +4,6 @@
 -keep class de.** { *; }
 -keep class io.** { *; }
 -keep class org.** { *; }
--keep class com.microsoft.** { *; }
 -keep class com.rymmmmm.** { *; }
 -keep class cn.lliiooll.** { *; }
 -keep class xyz.nextalone.** { *; }

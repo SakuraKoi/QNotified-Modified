@@ -48,7 +48,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
-import me.singleneuron.hook.AppCenterHookKt;
 import nil.nadph.qnotified.ExfriendManager;
 import nil.nadph.qnotified.activity.TroubleshootActivity;
 import nil.nadph.qnotified.base.annotation.FunctionEntry;
@@ -176,7 +175,6 @@ public class DelDetectorHook extends CommonDelayableHook {
     public boolean initOnce() {
         findAndHookMethod(load("com/tencent/widget/PinnedHeaderExpandableListView"), "setAdapter",
             ExpandableListAdapter.class, exfriendEntryHook);
-        AppCenterHookKt.initAppCenterHook();
         XposedHelpers
             .findAndHookMethod(load("com/tencent/mobileqq/activity/SplashActivity"), "doOnResume",
                 new XC_MethodHook(700) {
