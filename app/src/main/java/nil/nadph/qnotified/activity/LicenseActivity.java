@@ -84,7 +84,7 @@ public class LicenseActivity extends IphoneTitleBarActivityCompat implements Vie
         notices.addNotice(new Notice(
             "ColorPicker", "https://github.com/jaredrummler/ColorPicker",
             "Copyright 2016 Jared Rummler\nCopyright 2015 Daniel Nilsson",
-            new ApacheSoftwareLicense20()););
+            new ApacheSoftwareLicense20()));
         notices.addNotice(LicensesDialog.LICENSES_DIALOG_NOTICE);
 
         BaseAdapter mAdapter = new BaseAdapter() {
