@@ -22,11 +22,9 @@
 
 package me.singleneuron.qn_kernel.ui.fragment
 
-import me.ketal.data.ConfigData
 import me.singleneuron.qn_kernel.data.hostInfo
 import nil.nadph.qnotified.activity.EulaActivity
 import nil.nadph.qnotified.activity.LicenseActivity
-import nil.nadph.qnotified.util.UpdateCheck
 import nil.nadph.qnotified.util.Utils
 import org.ferredoxin.ferredoxinui.common.base.*
 import java.text.SimpleDateFormat
@@ -61,21 +59,6 @@ val About: UiScreen = uiScreen {
             title = "QQ版本"
             clickAble = false
             subSummary = "${hostInfo.versionName}(${hostInfo.versionCode})"
-        }, uiChangeableItem<String?> {
-            title = "检查更新"
-            clickAble = true
-            onClickListener = {
-                val uc = UpdateCheck()
-                uc.onClick(it, value)
-                true
-            }
-        }, uiChangeableItem<String?> {
-            title = "更新通道"
-            value.value = ConfigData<String>("qn_update_channel").getOrDefault("Alpha")
-            onClickListener = {
-                UpdateCheck().showChannelDialog(it,value)
-                true
-            }
         })
     })
 }.second

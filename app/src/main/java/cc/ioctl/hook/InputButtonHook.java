@@ -48,7 +48,6 @@ import nil.nadph.qnotified.hook.CommonDelayableHook;
 import nil.nadph.qnotified.step.DexDeobfStep;
 import nil.nadph.qnotified.ui.TouchEventToLongClickAdapter;
 import nil.nadph.qnotified.ui.widget.InterceptLayout;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.CustomMenu;
 import nil.nadph.qnotified.util.DexKit;
 import nil.nadph.qnotified.util.Initiator;
@@ -255,7 +254,6 @@ public class InputButtonHook extends CommonDelayableHook {
                             new Object[0]);
                         SystemServiceUtils.copyToClipboard(ctx, text);
                         Toasts.info(ctx, "复制成功");
-                        CliOper.copyCardMsg(text);
                     } else if (load("com.tencent.mobileqq.data.MessageForArkApp")
                         .isAssignableFrom(chatMessage.getClass())) {
                         String text = (String) invoke_virtual(
@@ -263,7 +261,6 @@ public class InputButtonHook extends CommonDelayableHook {
                             new Object[0]);
                         SystemServiceUtils.copyToClipboard(ctx, text);
                         Toasts.info(ctx, "复制成功");
-                        CliOper.copyCardMsg(text);
                     }
                 } catch (Throwable e) {
                     log(e);

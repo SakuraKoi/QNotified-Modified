@@ -48,7 +48,6 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
-import me.singleneuron.hook.AppCenterHookKt;
 import nil.nadph.qnotified.ExfriendManager;
 import nil.nadph.qnotified.activity.TroubleshootActivity;
 import nil.nadph.qnotified.base.annotation.FunctionEntry;
@@ -56,7 +55,6 @@ import nil.nadph.qnotified.bridge.FriendChunk;
 import nil.nadph.qnotified.config.ConfigManager;
 import nil.nadph.qnotified.hook.CommonDelayableHook;
 import nil.nadph.qnotified.ui.ResUtils;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.LicenseStatus;
 import nil.nadph.qnotified.util.Utils;
 
@@ -177,7 +175,6 @@ public class DelDetectorHook extends CommonDelayableHook {
     public boolean initOnce() {
         findAndHookMethod(load("com/tencent/widget/PinnedHeaderExpandableListView"), "setAdapter",
             ExpandableListAdapter.class, exfriendEntryHook);
-        AppCenterHookKt.initAppCenterHook();
         XposedHelpers
             .findAndHookMethod(load("com/tencent/mobileqq/activity/SplashActivity"), "doOnResume",
                 new XC_MethodHook(700) {
@@ -201,7 +198,6 @@ public class DelDetectorHook extends CommonDelayableHook {
                             if (z) {
                                 return;
                             }
-                            CliOper.onLoad();
                             z = true;
                         }
                     }

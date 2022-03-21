@@ -68,7 +68,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import me.singleneuron.activity.BugReportActivity;
 import me.singleneuron.data.CardMsgCheckResult;
 import me.singleneuron.hook.DebugDump;
 import me.singleneuron.qn_kernel.data.HostInfo;
@@ -139,10 +138,6 @@ public class TroubleshootActivity extends IphoneTitleBarActivityCompat {
             clickToWipeAllFriends()));
         ll.addView(
             newListItemButton(this, "刷新黑白名单状态", "这个按钮没啥用", null, clickToRefreshUserStatus()));
-        ll.addView(subtitle(this, ""));
-        ll.addView(subtitle(this, "反馈"));
-        ll.addView(newListItemButton(this, "提交BUG反馈", null, null,
-            clickToProxyActAction(BugReportActivity.class)));
         ll.addView(subtitle(this, ""));
         ll.addView(subtitle(this, "以下内容基本上都没用，它们为了修复故障才留在这里。"));
         ll.addView(subtitle(this, "测试"));
@@ -454,7 +449,6 @@ public class TroubleshootActivity extends IphoneTitleBarActivityCompat {
                         String msg;
                         Throwable t = null;
                         try {
-                            LicenseStatus.setUserCurrentStatus();
                             sb = new StringBuilder();
                             sb.append(uin).append(": ");
                             if (LicenseStatus.isWhitelisted()) {

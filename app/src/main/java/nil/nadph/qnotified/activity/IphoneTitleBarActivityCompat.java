@@ -40,9 +40,7 @@ import com.tencent.mobileqq.app.IphoneTitleBarActivity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import nil.nadph.qnotified.ui.ResUtils;
-import nil.nadph.qnotified.util.CliOper;
 import nil.nadph.qnotified.util.SavedInstanceStatePatchedClassReferencer;
-import nil.nadph.qnotified.util.Utils;
 
 @SuppressWarnings("deprecation")
 @SuppressLint("Registered")
@@ -69,7 +67,6 @@ public class IphoneTitleBarActivityCompat extends IphoneTitleBarActivity {
         } catch (Throwable e) {
             log(e);
         }
-        CliOper.enterModuleActivity(Utils.getShort$Name(this));
         return ret;
     }
 

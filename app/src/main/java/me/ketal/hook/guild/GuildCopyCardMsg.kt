@@ -27,7 +27,6 @@ import cc.ioctl.hook.InputButtonHook.R_ID_COPY_CODE
 import nil.nadph.qnotified.R
 import nil.nadph.qnotified.base.annotation.FunctionEntry
 import nil.nadph.qnotified.hook.CommonDelayableHook
-import nil.nadph.qnotified.util.CliOper
 import nil.nadph.qnotified.util.CustomMenu
 import nil.nadph.qnotified.util.ReflexUtil.getFirstByType
 import nil.nadph.qnotified.util.Toasts
@@ -80,7 +79,6 @@ object GuildCopyCardMsg : CommonDelayableHook("GuildCopyCardMsg") {
                 }
                 copyToClipboard(ctx, text)
                 Toasts.info(ctx, "复制成功")
-                CliOper.copyCardMsg(text)
                 fragment.invoke("dismiss")
             }
         }

@@ -331,7 +331,6 @@ public class Utils {
     public static void loge(String str) {
         Log.e("QNdump", str);
         try {
-            BugCollector.onThrowable(new Throwable(str));
             XposedBridge.log(str);
         } catch (NoClassDefFoundError e) {
             Log.e("Xposed", str);
@@ -432,10 +431,6 @@ public class Utils {
         } catch (NoClassDefFoundError e) {
             Log.e("Xposed", msg);
             Log.e("EdXposed-Bridge", msg);
-        }
-        try {
-            BugCollector.onThrowable(th);
-        } catch (Throwable ignored) {
         }
         if (ENABLE_DUMP_LOG) {
             String path =

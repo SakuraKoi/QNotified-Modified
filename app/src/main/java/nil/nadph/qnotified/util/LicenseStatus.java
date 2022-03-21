@@ -22,16 +22,10 @@
 package nil.nadph.qnotified.util;
 
 import static nil.nadph.qnotified.util.Utils.log;
-import static nil.nadph.qnotified.util.Utils.logi;
 
 import java.io.IOException;
-import java.util.Date;
 import me.singleneuron.qn_kernel.data.HostInfo;
-import nil.nadph.qnotified.BuildConfig;
-import nil.nadph.qnotified.activity.EulaActivity;
 import nil.nadph.qnotified.config.ConfigManager;
-import nil.nadph.qnotified.remote.TransactionHelper;
-import nil.nadph.qnotified.util.data.UserStatusConst;
 
 public class LicenseStatus {
 
@@ -39,10 +33,6 @@ public class LicenseStatus {
     public static final String qn_user_auth_status = "qn_user_auth_status";
     public static final String qn_user_auth_last_update = "qn_user_auth_last_update";
     public static final boolean sDisableCommonHooks = LicenseStatus.isBlacklisted();
-
-    public static int getEulaStatus() {
-        return ConfigManager.getDefaultConfig().getIntOrDefault(qn_eula_status, 0);
-    }
 
     public static void setEulaStatus(int status) {
         ConfigManager.getDefaultConfig().putInt(qn_eula_status, status);
@@ -55,109 +45,27 @@ public class LicenseStatus {
     }
 
     public static boolean hasEulaUpdated() {
-        int s = getEulaStatus();
-        return (s != 0 && s != EulaActivity.CURRENT_EULA_VERSION);
+        return false;
     }
 
     public static boolean hasUserAcceptEula() {
-        return getEulaStatus() == EulaActivity.CURRENT_EULA_VERSION;
+        return true;
     }
-
-
-    public static void setUserCurrentStatus() {
-        new Thread(() -> {
-            int currentStatus = TransactionHelper.getUserStatus(Utils.getLongAccountUin());
-            // 如果获取不到就放弃更新状态
-            if (currentStatus == UserStatusConst.notExist) {
-                return;
-            }
-            logi("User Current Status: "
-                + "" + currentStatus);
-            ConfigManager.getDefaultConfig().putInt(qn_user_auth_status, currentStatus);
-            ConfigManager.getDefaultConfig()
-                .putLong(qn_user_auth_last_update, System.currentTimeMillis());
-            try {
-                ConfigManager.getDefaultConfig().save();
-                logi("User Current Status in ConfigManager: "
-                    + ConfigManager.getDefaultConfig().getIntOrDefault(qn_user_auth_status, -1));
-                logi("User Status Last Update: " + new Date(ConfigManager.getDefaultConfig()
-                    .getLongOrDefault(qn_user_auth_last_update, System.currentTimeMillis())));
-            } catch (IOException e) {
-                log(e);
-                Toasts.error(HostInfo.getHostInfo().getApplication(), e.toString());
-            }
-        }).start();
-
-    }
-
 
     public static boolean isInsider() {
-        int currentStatus = ConfigManager.getDefaultConfig()
-            .getIntOrDefault(qn_user_auth_status, -1);
-        if (currentStatus == UserStatusConst.notExist) {
-            LicenseStatus.setUserCurrentStatus();
-            currentStatus = ConfigManager.getDefaultConfig()
-                .getIntOrDefault(qn_user_auth_status, -1);
-        }
-        long lastUpdate = ConfigManager.getDefaultConfig()
-            .getLongOrDefault(qn_user_auth_last_update, System.currentTimeMillis());
-        if (lastUpdate >= lastUpdate + 30 * 60 * 1000) {
-            LicenseStatus.setUserCurrentStatus();
-        }
-        return currentStatus == UserStatusConst.developer;
+        return true;
     }
 
     public static boolean isBlacklisted() {
-        int currentStatus = ConfigManager.getDefaultConfig()
-            .getIntOrDefault(qn_user_auth_status, -1);
-        if (currentStatus == UserStatusConst.notExist) {
-            LicenseStatus.setUserCurrentStatus();
-            currentStatus = ConfigManager.getDefaultConfig()
-                .getIntOrDefault(qn_user_auth_status, -1);
-        }
-        long lastUpdate = ConfigManager.getDefaultConfig()
-            .getLongOrDefault(qn_user_auth_last_update, System.currentTimeMillis());
-        if (lastUpdate >= lastUpdate + 30 * 60 * 1000) {
-            LicenseStatus.setUserCurrentStatus();
-        }
-        return currentStatus == UserStatusConst.blacklisted;
+        return false;
     }
 
     public static boolean isWhitelisted() {
-        int currentStatus = ConfigManager.getDefaultConfig()
-            .getIntOrDefault(qn_user_auth_status, -1);
-        if (currentStatus == UserStatusConst.notExist) {
-            LicenseStatus.setUserCurrentStatus();
-            currentStatus = ConfigManager.getDefaultConfig()
-                .getIntOrDefault(qn_user_auth_status, -1);
-        }
-        long lastUpdate = ConfigManager.getDefaultConfig()
-            .getLongOrDefault(qn_user_auth_last_update, System.currentTimeMillis());
-        if (lastUpdate >= lastUpdate + 30 * 60 * 1000) {
-            LicenseStatus.setUserCurrentStatus();
-        }
-        return currentStatus == UserStatusConst.whitelisted
-            || currentStatus == UserStatusConst.developer;
+        return true;
     }
 
     public static boolean isAsserted() {
-        int currentStatus = ConfigManager.getDefaultConfig()
-            .getIntOrDefault(qn_user_auth_status, -1);
-        if (BuildConfig.DEBUG) {
-            return true;
-        }
-        if (currentStatus == UserStatusConst.notExist) {
-            LicenseStatus.setUserCurrentStatus();
-            currentStatus = ConfigManager.getDefaultConfig()
-                .getIntOrDefault(qn_user_auth_status, -1);
-        }
-        long lastUpdate = ConfigManager.getDefaultConfig()
-            .getLongOrDefault(qn_user_auth_last_update, System.currentTimeMillis());
-        if (lastUpdate >= lastUpdate + 30 * 60 * 1000) {
-            LicenseStatus.setUserCurrentStatus();
-        }
-        return currentStatus == UserStatusConst.whitelisted
-            || currentStatus == UserStatusConst.developer;
+        return true;
     }
 
 }
