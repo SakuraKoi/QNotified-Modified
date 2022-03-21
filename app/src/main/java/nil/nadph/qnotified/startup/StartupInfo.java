@@ -22,6 +22,11 @@
 
 package nil.nadph.qnotified.startup;
 
+import android.graphics.drawable.Drawable;
+
 public class StartupInfo {
     public static String modulePath = null;
+
+    public static Drawable res_inject_ic_notify_qzone;
+    public static Drawable res_inject_ic_notify_qq;
 }

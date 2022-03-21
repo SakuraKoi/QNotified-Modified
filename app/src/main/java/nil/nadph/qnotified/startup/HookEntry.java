@@ -21,11 +21,16 @@
  */
 package nil.nadph.qnotified.startup;
 
+import android.content.res.Resources;
+import android.content.res.XModuleResources;
+import android.util.Log;
+import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources.InitPackageResourcesParam;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import me.singleneuron.util.HookStatue;
 import nil.nadph.qnotified.R;
@@ -38,7 +43,7 @@ import nil.nadph.qnotified.R;
  *
  * @author kinit
  */
-public class HookEntry implements IXposedHookLoadPackage, IXposedHookZygoteInit {
+public class HookEntry implements IXposedHookLoadPackage, IXposedHookZygoteInit, IXposedHookInitPackageResources {
 
     public static final String PACKAGE_NAME_QQ = "com.tencent.mobileqq";
     public static final String PACKAGE_NAME_QQ_INTERNATIONAL = "com.tencent.mobileqqi";
@@ -76,7 +81,27 @@ public class HookEntry implements IXposedHookLoadPackage, IXposedHookZygoteInit 
     }
 
     @Override
-    public void initZygote(StartupParam startupParam) throws Throwable {
+    public void initZygote(StartupParam startupParam) {
         StartupInfo.modulePath = startupParam.modulePath;
+    }
+
+    @Override
+    public void handleInitPackageResources(InitPackageResourcesParam resparam) {
+        Log.d("QNotifyEvoXP", "Resource inject: package " + resparam.packageName + " module="+StartupInfo.modulePath);
+        if (!PACKAGE_NAME_QQ.equals(resparam.packageName))
+            return;
+
+        XModuleResources modRes = XModuleResources.createInstance(StartupInfo.modulePath, resparam.res);
+        try {
+            StartupInfo.res_inject_ic_notify_qzone = modRes.getDrawable(R.drawable.ic_notify_qzone);
+        } catch (Resources.NotFoundException e) {
+            Log.e("QNotifyEvoXP", "ic_notify_qzone cannot be found from XModuleResources, still try inject...");
+        }
+        try {
+            StartupInfo.res_inject_ic_notify_qq = modRes.getDrawable(R.drawable.ic_notify_qq);
+        } catch (Resources.NotFoundException e) {
+            Log.e("QNotifyEvoXP", "ic_notify_qq cannot be found from XModuleResources, still try inject...");
+        }
+        Log.i("QNotifyEvoXP", "Resource injected");
     }
 }
