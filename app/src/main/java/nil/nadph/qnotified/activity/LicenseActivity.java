@@ -50,35 +50,41 @@ public class LicenseActivity extends IphoneTitleBarActivityCompat implements Vie
         super.doOnCreate(bundle);
 
         final Notices notices = new Notices();
-        Notice markwon = new Notice("Markwon", "https://github.com/noties/Markwon",
-            "Copyright 2017 Dimitry Ivanov (mail@dimitryivanov.ru)", new ApacheSoftwareLicense20());
-        Notice colorPicker = new Notice("ColorPicker",
-            "https://github.com/jaredrummler/ColorPicker",
-            "Copyright 2016 Jared Rummler\nCopyright 2015 Daniel Nilsson",
-            new ApacheSoftwareLicense20());
-        notices.addNotice(new Notice("QQ净化", "https://github.com/zpp0196/QQPurify", "zpp0196",
-            new ApacheSoftwareLicense20()));
-        notices.addNotice(
-            new Notice("NoApplet", "https://github.com/Alcatraz323/noapplet", "Alcatraz323",
-                new MITLicense()));
-        notices.addNotice(new Notice("原生音乐通知", "https://github.com/singleNeuron/XposedMusicNotify",
+        notices.addNotice(new Notice(
+            "QQ-Notify-Evolution",
+            "https://github.com/ichenhe/QQ-Notify-Evolution",
+            "ichenhe", new CustomLicense()));
+        notices.addNotice(new Notice(
+            "QQ净化",
+            "https://github.com/zpp0196/QQPurify",
+            "zpp0196", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice(
+            "NoApplet", "https://github.com/Alcatraz323/noapplet",
+            "Alcatraz323", new MITLicense()));
+        notices.addNotice(new Notice(
+            "原生音乐通知", "https://github.com/singleNeuron/XposedMusicNotify",
             "singleNeuron", new GnuLesserGeneralPublicLicense3()));
-        notices.addNotice(
-            new Notice("QQSpeciallyCare", "https://github.com/singleNeuron/QQSpeciallyCare",
-                "singleNeuron", new ApacheSoftwareLicense20()));
-        notices.addNotice(new Notice("MMKV", "https://github.com/Tencent/MMKV",
+        notices.addNotice(new Notice(
+            "QQSpeciallyCare", "https://github.com/singleNeuron/QQSpeciallyCare",
+            "singleNeuron", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice(
+            "MMKV", "https://github.com/Tencent/MMKV",
             "Copyright (C) 2018 THL A29 Limited, a Tencent company. All rights reserved.",
             new BSD3ClauseLicense()));
-        notices.addNotice(
-            new Notice("QQHelper", "https://github.com/Qiwu2542284182/QQHelper", "祈无",
-                new ApacheSoftwareLicense20())
-        );
-        notices.addNotice(
-            new Notice("Ferredoxin UI", "https://github.com/ferredoxin/FerredoxinUI", "ferredoxin",
-                new CustomLicense())
-        );
-        notices.addNotice(markwon);
-        notices.addNotice(colorPicker);
+        notices.addNotice(new Notice(
+            "QQHelper", "https://github.com/Qiwu2542284182/QQHelper",
+            "祈无", new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice(
+            "Ferredoxin UI", "https://github.com/ferredoxin/FerredoxinUI",
+            "ferredoxin", new CustomLicense()));
+        notices.addNotice(new Notice(
+            "Markwon", "https://github.com/noties/Markwon",
+            "Copyright 2017 Dimitry Ivanov (mail@dimitryivanov.ru)",
+            new ApacheSoftwareLicense20()));
+        notices.addNotice(new Notice(
+            "ColorPicker", "https://github.com/jaredrummler/ColorPicker",
+            "Copyright 2016 Jared Rummler\nCopyright 2015 Daniel Nilsson",
+            new ApacheSoftwareLicense20()););
         notices.addNotice(LicensesDialog.LICENSES_DIALOG_NOTICE);
 
         BaseAdapter mAdapter = new BaseAdapter() {
