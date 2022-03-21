@@ -33,7 +33,7 @@ import java.util.*
 val About: UiScreen = uiScreen {
     name = "关于"
     contains = linkedMapOf(uiAboutItem {
-        title = "QNotified"
+        title = "QNotified.Arks"
         icon = {
             it.getDrawable(nil.nadph.qnotified.R.drawable.icon)!!
         }
