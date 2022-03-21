@@ -30,7 +30,6 @@ abstract class ReplaceIcon : DefaultTask() {
     fun run() {
         val iconsDir = File(project.projectDir, "icons")
         val iconFileDirs = listOf(
-            File(iconsDir, "MiStyleIcons"),
             File(iconsDir, "classic"),
             //File(projectDir ,"ChineseNewYearIcons")
         )
