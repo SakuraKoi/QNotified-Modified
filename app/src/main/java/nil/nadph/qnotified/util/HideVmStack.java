@@ -27,6 +27,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressLint("DiscouragedPrivateApi")
 public class HideVmStack {
@@ -50,10 +51,26 @@ public class HideVmStack {
         return sHideEnabled;
     }
 
+    private static ArrayList<String> blacklistedPackages = new ArrayList<>();
+
+
     private static void init() {
         if (inited) {
             return;
         }
+        blacklistedPackages.addAll(Arrays.asList(
+            "cc.chenhe.qqnotifyevo.",
+            "cc.ioctl.",
+            "cn.lliiooll.",
+            "com.rymmmmm.hook.",
+            "me.ketal.",
+            "me.kyuubiran.",
+            "me.singleneuron.",
+            "me.zpp0196.qqpurify.",
+            "nil.nadph.qnotified.",
+            "sakura.kooi.QNotifiedModified.",
+            "xyz.nextalone."
+        ));
         try {
             Method m = Throwable.class.getDeclaredMethod("getOurStackTrace");
             XposedBridge.hookMethod(m, new XC_MethodHook() {
@@ -67,9 +84,14 @@ public class HideVmStack {
                     if (ste != null) {
                         ArrayList<StackTraceElement> fakeSt = new ArrayList<>();
                         for (StackTraceElement e : ste) {
-                            if (!e.getClassName().contains("nil.nadph.qnotified.")) {
-                                fakeSt.add(e);
+                            boolean found = false;
+                            for (String pkg : blacklistedPackages) {
+                                if (e.getClassName().contains(pkg)) {
+                                    found = true;
+                                    break;
+                                }
                             }
+                            if (!found) fakeSt.add(e);
                         }
                         param.setResult(fakeSt.toArray(EMPTY_STACK_TRACE));
                     }
@@ -92,9 +114,14 @@ public class HideVmStack {
                     if (ste != null) {
                         ArrayList<StackTraceElement> fakeSt = new ArrayList<>();
                         for (StackTraceElement e : ste) {
-                            if (!e.getClassName().contains("nil.nadph.qnotified.")) {
-                                fakeSt.add(e);
+                            boolean found = false;
+                            for (String pkg : blacklistedPackages) {
+                                if (e.getClassName().contains(pkg)) {
+                                    found = true;
+                                    break;
+                                }
                             }
+                            if (!found) fakeSt.add(e);
                         }
                         param.setResult(fakeSt.toArray(EMPTY_STACK_TRACE));
                     }
