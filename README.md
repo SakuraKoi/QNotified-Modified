@@ -1,3 +1,10 @@
+# QNotified-Modified
+此二次开发版本已停止维护, 咱转到QAuxiliary上做魔改了\
+https://github.com/SakuraKoi/QAuxiliary-Modified
+
+修改内容
+- QQ通知进化
+
 # QNotified
 
 ![QNotified logo](https://raw.githubusercontent.com/ferredoxin/QNotified/master/docs/title.png)
